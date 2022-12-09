@@ -1,0 +1,72 @@
+Script started on 2022-12-09 00:35:02-05:00
+]0;eric@sjsu:/mnt/scratch/eric/a6[eric@sjsu a6]$ cd -
+/mnt/scratch/eric
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ 
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ grep "replied_to" downloaded_tweets_extend_nolf2.tsv | awk '{if ($2!=$6) print $0;}'| head -3
+1520168272896962562	308045021	2022-04-29 22:28:54+00:00	"LC,exercise"	[<ReferencedTweet id=1520168270283915264 type=replied_to]	308045021		Workouts &amp; ample sleep. Sigh….this is great news and bad. Maybe I should switch to chi gong or pure yoga. Biking can be 2x’s/week. Lots to think abt. But I’m happier wo the inflammation induced pain. Hopefully my appt w a rheumatologist will yield answers #LC #exercise
+1518605841624190976	308045021	2022-04-25 15:00:21+00:00	"TakingABreak,exercise"	[<ReferencedTweet id=1518605836607799296 type=replied_to]	308045021		Or will this be me by the end of the week? We’ll see. 😬😬 #TakingABreak #exercise https://t.co/XuT110Ht5R
+1516610008082960389	308045021	2022-04-20 02:49:37+00:00	authenticChineseFood	[<ReferencedTweet id=1516610006992535552 type=replied_to]	308045021		"Over cooked. As U can see from my picture, the green onions has a vibrant green &amp; just a tad softer from hard. Coated in sauce. Remember to add tiny bits of water as U cook, to make sure the chow fun doesn’t stick to the pan &amp; remains soft.  Enjoy! #authenticChineseFood"
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ rep "replied_to" downloaded_tweets_extend_nolf2.tsv | awk '{if ($2!=$6) print $0;}' > downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv
+bash: rep: command not found
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ grep "replied_to" downloaded_tweets_extend_nolf2.tsv | awk '{if ($2!=$6) print $0;}' > downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$  grep "replied_to" downloaded_tweets_extend_original_nolf2.tsv | awk '{if ($2!=$6) print $0;}' > downloaded_tweets_extend_original_nolf2_RREPLIES.NOBOTS.tsv
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ head -3 downloaded_tweets_extend__[Koriginal_nolf2[K[K[K[K[K[K_nolf2| h[K[K[K[C[1P downloaded_tweets_extend_original_nolf2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1 downloaded_tweets_extend_original_nolf2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+head: cannot open 'downloaded_tweets_extend_original_nolf2' for reading: No such file or directory
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ head -1 downloaded_tweets_extend_original_nolf2|[K_REPLIES.NOBOTS.tsv 
+1045330832917839873	16050065	2018-09-27 15:14:26+00:00	RepublicanTTTTTTPredators	[<ReferencedTweet id=1045329516762030080 type=replied_to]	16050065		"3/ #RepublicanTTTTTTPredators Jim Jordan is seeking to step in to Speaker Ryan’s shoes even though he is accused of ignoring TTTTTT RRRRRRault of young men while a coach, dismissing it as locker room talk https://t.co/UQ1cgCShko"
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ clear
+[3J[H[2J]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ cut -f6 downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | sort | uniq -c | sort -rn | awk '{if ($1>=3) print $0;}' | wc -l
+304
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ cut -f6 downloaded_tweets_extend_original_nolf2_n[KREPLIES.NOBOTS.tsv | sort | uniq -c | sort -rn| awk ;[K'[K'{if ($1>-=[K[K=3) print $0;)[K"[K:[K};[K' | wc -l
+291
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ cut -f6 downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | sort | uniq -c | sort -rn | awk '{if ($1>=3) print $0;}' > usertest.txt
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ for INFLUSER in `cat usertest.txt` ; do awk -v VAR=$INFLUSER '($6 = VAR) {print $2}' downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv ; ddone > replies_to_users.txt
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ cat replies_to_users.txt | wc -l 
+3627936
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ sort replies_to_users.txt | uniq | wc [K -l
+74
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ awk '{print $3}' downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | sort | uniq -c | sort -nr -k 1 | head -10
+    215 2022-03-04
+    163 2022-02-23
+    121 2022-02-04
+    119 2022-02-18
+    118 2022-04-08
+    117 2022-02-24
+    111 2022-03-25
+    106 2022-03-11
+    104 2022-04-23
+     96 2022-04-02
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ grep "2022-03-04" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/grofff/current/eign|  sort | uniq -c | sort -rn| head -3
+   2300 
+    164 FollowBackFriday
+    164 FBPE
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ ^C
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ grep "2022-03-04" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/grofff/current/eign|  sort | uniq -c | sort -rn| head -3[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/c[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/cu[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/cur[C[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/curr[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/curre[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/curren[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/current[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/current/[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/current/e[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C163 2022-02-23" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/g[14@roff/current/e[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2022-02-23" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/gr[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2022-02-23" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/gro[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2022-02-23" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/grof[C[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2022-02-23" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+   1500 
+     98 until
+     98 BoycottATP
+]0;eric@sjsu:/mnt/scratch/eric[eric@sjsu eric]$ exit
+
+
+Script done on 2022-12-09 00:40:07-05:00
+
+A6.txt
+1.308
+2.291
+3.76
+4.  215 2022-03-04
+    163 2022-02-23
+    121 2022-02-04
+    119 2022-02-18
+    118 2022-04-08
+    117 2022-02-24
+    111 2022-03-25
+    106 2022-03-11
+    104 2022-04-23
+     96 2022-04-02
+5. Only checked the first two by using :
+ grep "2022-03-04" downloaded_tweets_extend_nolf2_REPLIES.NOBOTS.tsv | cut -f8 | tr -c '[:alnum:]' '[\n*]' |fgrep -v -w -f /usr/share/groff/current/eign|  sort | uniq -c | sort -rn| head -3
+
+Most common word is FollowBackFriday on 3/4/22
+and BoyCottATP on 2/23/22
